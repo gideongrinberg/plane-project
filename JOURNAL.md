@@ -7,12 +7,12 @@ created_at: "2025-07-24"
 
 # UAV Project
 
-Total time spent as of July 26: 7 hours and 15 minutes
+Total time spent as of July 26: 7 hours and 30 minutes
 
 ## July 24 &mdash; Project Start
 (I am using this to store my research, so it's a little chaotic)
 
-I've decided I would like to build an RC plane with some kind of long-distance, autonomous capability. Based on my research, the only legal restriction on this project is that it has to be under 55 lbs. I subsequently spent a while researching telemetry and control systems for long-distance projects. It seems like the typical approach is to use some kind of LoRa system like ELRS or OpenLRS for telemetry and control inputs. Another less conventional approach is to use cellular for long-range telemetry and video streaming, combined with a regular RC controller for lower-latency short-range control during takeoff and landing. Arduino offers a [4G modem](https://store-usa.arduino.cc/products/4g-module-global?variant=43479310139599&utm_source=chatgpt.com) with builtin GNSS. Some other projects use a Raspberry Pi with a USB modem.
+I've decided I would like to build an RC plane with some kind of long-distance, autonomous capability. Based on my research, the only legal restriction on this project is that it has to be under 55 lbs. I subsequently spent a while researching telemetry and control systems for long-distance projects. It seems like the typical approach is to use some kind of LoRa system like ELRS or OpenLRS for telemetry and control inputs. Another less conventional approach is to use cellular for long-range telemetry and video streaming, combined with a regular RC controller for lower-latency short-range control during takeoff and landing. Arduino offers a [4G modem](https://store-usa.arduino.cc/products/4g-module-global?variant=43479310139599) with builtin GNSS. Some other projects use a Raspberry Pi with a USB modem.
 
 I think I'd like to avoid using prebuilt flight control components as much as possible, and make this as DIY as I can. 
 
@@ -39,6 +39,6 @@ Time spent: 4hr (roughly 1 hour on researching and 3 hours tweaking the ASB desi
 
 ## July 26 &mdash; Continued Design Work
 
-I found an issue in the design of the tail that would have introduced instability and cause the aircraft to pitch uncontrollably up in flight. By changing the dimensions of the tail, I was able to ensure that the aircraft will be more stable in flight. In particular, it should be stable in cruise, although it is still unstable around very low angles of attack, so I will need to be careful while landing it.
+I found an issue in the design of the tail that would have introduced instability and cause the aircraft to pitch uncontrollably up in flight. By changing the dimensions of the tail, I was able to ensure that the aircraft will be more stable in flight. In particular, it should be stable in cruise, although it is still unstable around very low angles of attack, so I will need to be careful while landing it. Additionally, I optimized the center of gravity by shifting the nose cone back a bit. I have begun to identify my materials. I will use EPS foam for the wings with a 6mm carbon fiber spar down the middle. I will need to purchase a foam cutter, and will need to make or order templates for the airfoil.
 
-Time spent: 0.75hr
+Time spent: 1hr

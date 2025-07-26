@@ -47,23 +47,30 @@ sweep_LE = 0  # straight wing
 
 airfoil_wing = asb.Airfoil(name="sd7037")
 half_span = span / 2
+
+x_wing = opti.variable(init_guess=0.02, lower_bound=-0.05, upper_bound=0.10)
+
 wing = asb.Wing(
     name="Main Wing",
     symmetric=True,
     xsecs=[
-        # Root section positioned at pod's widest point (~x=0.02 m)
         asb.WingXSec(
-            xyz_le=[0.02, 0, 0],  # Moved wing rearward to pod max radius
+            xyz_le=[x_wing, 0, 0],
             chord=root_chord,
             airfoil=airfoil_wing
         ),
         asb.WingXSec(
-            xyz_le=[0.02 + sweep_LE, half_span, 0],
+            xyz_le=[x_wing + sweep_LE, half_span, 0],
             chord=tip_chord,
             airfoil=airfoil_wing
         ),
     ],
 )
+
+opti.subject_to([
+    x_wing >= -0.03,  
+    x_wing <= 0.08
+])
 
 # vtail
 tail_arm = opti.variable(
@@ -117,6 +124,12 @@ fuselage_pod = asb.Fuselage(
 min_internal_vol = 0.0005 # ~30 cubic inches
 opti.subject_to(fuselage_pod.volume() >= min_internal_vol)
 
+x_battery = opti.variable(init_guess=-0.02, lower_bound=-0.15, upper_bound=0.05)
+opti.subject_to([
+    x_battery >= -0.18,
+    x_battery <= 0.05
+])
+
 fuselage_boom = asb.Fuselage(
     name="Tail Boom",
     xsecs=[
@@ -139,6 +152,7 @@ mp_power = asb.mass_properties_from_radius_of_gyration(
 mp_batt = asb.mass_properties_from_radius_of_gyration(
     mass=0.280, x_cg=-0.02
 )
+
 mp_elec = asb.mass_properties_from_radius_of_gyration(
     mass=0.045, x_cg=0.00
 )
@@ -170,7 +184,7 @@ opti.subject_to(
 )
 
 static_margin = (aero["x_np"] - mass_tot.x_cg) / wing.mean_aerodynamic_chord()
-opti.subject_to(static_margin >= 0.10)
+opti.subject_to(static_margin >= 0.8)
 
 opti.subject_to(
     [
@@ -306,7 +320,7 @@ plt.show()
 ### Trim Curve
 
 ```{python}
-alphas = np.linspace(-2, 10, 15)
+alphas = np.linspace(-2, 10, 50)
 cms = []
 
 for alpha in alphas:
