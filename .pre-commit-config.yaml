@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: update-time
+        name: "Update Time in Journal"
+        entry: ./update_time.py
+        language: script
+        files: JOURNAL\.md
