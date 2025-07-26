@@ -1,0 +1,33 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["ezdxf[draw]"]
+# ///
+
+import sys
+import ezdxf
+from ezdxf.addons.drawing.frontend import Frontend
+from ezdxf.addons.drawing import layout, config
+from ezdxf.addons.drawing.properties import RenderContext
+from ezdxf.addons.drawing.pymupdf import PyMuPdfBackend
+
+if len(sys.argv) != 3:
+    print("Usage: dxf2png <input.dxf> <output.png>", file=sys.stderr)
+    sys.exit(1)
+
+dxf_path = sys.argv[1]
+png_path = sys.argv[2]
+doc = ezdxf.readfile(dxf_path)
+msp = doc.modelspace()
+ctx = RenderContext(doc)
+backend = PyMuPdfBackend()
+cfg = config.Configuration(
+    background_policy=config.BackgroundPolicy.WHITE,
+    color_policy=config.ColorPolicy.COLOR,
+)
+frontend = Frontend(ctx, backend, config=cfg)
+frontend.draw_layout(msp)
+page = layout.Page(210, 297, layout.Units.mm, margins=layout.Margins.all(20))
+png_bytes = backend.get_pixmap_bytes(page, fmt="png", dpi=300)
+with open(png_path, "wb") as f:
+    f.write(png_bytes)

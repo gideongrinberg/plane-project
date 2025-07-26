@@ -7,7 +7,7 @@ created_at: "2025-07-24"
 
 # UAV Project
 
-Total time spent as of July 26: 7 hours and 30 minutes
+Total time spent as of July 26: 11 hours and 0 minutes
 
 ## July 24 &mdash; Project Start
 (I am using this to store my research, so it's a little chaotic)
@@ -39,6 +39,15 @@ Time spent: 4hr (roughly 1 hour on researching and 3 hours tweaking the ASB desi
 
 ## July 26 &mdash; Continued Design Work
 
+### Morning – Flight Control Edits
 I found an issue in the design of the tail that would have introduced instability and cause the aircraft to pitch uncontrollably up in flight. By changing the dimensions of the tail, I was able to ensure that the aircraft will be more stable in flight. In particular, it should be stable in cruise, although it is still unstable around very low angles of attack, so I will need to be careful while landing it. Additionally, I optimized the center of gravity by shifting the nose cone back a bit. I have begun to identify my materials. I will use EPS foam for the wings with a 6mm carbon fiber spar down the middle. I will need to purchase a foam cutter, and will need to make or order templates for the airfoil.
 
 Time spent: 1hr
+
+### Afternoon – Wing Design and Templates
+
+I decided to start my design with the wings. The wings will be made of foam and cut using a hot wire. The main wings will be connected by one spar, which attaches the fuselage. The control surface servos will be mounted in the wing and wired through the spar. I will cut the wings as two separate pieces then create the hinges for the control surfaces. I've been researching various hinge constructions and they all seem simple. Mounting the v-tail will require more thought – I will either put the servos on the boom in the back, or in the fuselage and run a long pushrod down the side. I will decide once I have figured out the issue of weight. 
+
+Using my python script (and after a lot more effort than expected), I was able to export DXF templates for the wings and tail airfoils. I added slots for the wing spars and marked the control surfaces. I will need to make some kind of jig for the V-tail. I will also need to add the wing incidence angle to the templates to ensure proper AoA.
+
+Time spent: 3.5hr (a mix of researching and working on the templates. i know it doesn't seem like i accomplished a lot, but the templates were very difficult to debug. maybe cad is a better approach in the future.)
