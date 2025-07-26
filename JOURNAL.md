@@ -19,3 +19,9 @@ Where $\delta_L$ and $\delta_R$ represent the left and right ruddervator deflect
 Other than that, I basically spent a bunch of time researching aeronautics, drones, and what I will need to understand for this project.
 
 Time spent: 2.5hr
+
+## July 25 &mdash; Start Designing 
+
+I found a cool python tool called AeroSandbox that enables users to design and optimize aerospace vehicles, and I'm using it to prototype my vehicle. So far, I've sketched out the basic design in ASB. I've also used it to produce some basic graphs of various flight characteristics, which should help me catch issues in the design. One thing I want to look at further is the trim curve, which had some apparent issues I don't have time to investigate. I also plan to use ASB to estimate some of the basic characteristics of my design, such as endurance. The information I've gained from the ASB design will help me select parts for my drone. You can see some of the output in ./design/design.md. That file is generated from design.qmd using Quarto (basically RMarkdown for Python). The main.py code is basically identical to the Quarto code less the graphs. 
+
+Time spent: 4hr (roughly 1 hour on researching and 3 hours tweaking the ASB design)
