@@ -131,3 +131,55 @@ plt.show()
 ```
 
 ![](design_files/figure-commonmark/cell-7-output-1.png)
+
+### Trim Curve
+
+``` python
+alphas = np.linspace(-2, 10, 15)
+cms = []
+
+for alpha in alphas:
+    op = asb.OperatingPoint(
+        velocity=s(op_point.velocity),
+        alpha=alpha
+    )
+
+    aero = asb.AeroBuildup(
+        airplane=airplane_sol,
+        op_point=op,
+        xyz_ref=s(mass_tot.xyz_cg)
+    ).run_with_stability_derivatives(alpha=True)
+    cms.append(aero["Cm"])
+
+plt.figure()
+plt.plot(alphas, cms)
+plt.axhline(0, color="black", linestyle="--")
+plt.xlabel("Angle of Attack [deg]")
+plt.ylabel("Pitching Moment Coefficient (Cm)")
+plt.title("Trim Curve: Cm vs Alpha")
+plt.grid(True)
+plt.show()
+
+print(f"α {" " * 5} Cm")
+for a, c in zip(alphas, cms):
+    print(f"{a:0.2f} {" " * 5} {c[0]:0.5f}")
+```
+
+![](design_files/figure-commonmark/cell-8-output-1.png)
+
+    α       Cm
+    -2.00       0.01375
+    -1.14       0.00889
+    -0.29       0.01308
+    0.57       0.01725
+    1.43       0.01622
+    2.29       0.00497
+    3.14       -0.02061
+    4.00       -0.05589
+    4.86       -0.08778
+    5.71       -0.11108
+    6.57       -0.12860
+    7.43       -0.14435
+    8.29       -0.15737
+    9.14       -0.16057
+    10.00       -0.14215

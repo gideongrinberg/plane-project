@@ -67,16 +67,16 @@ wing = asb.Wing(
 
 # vtail
 tail_arm = opti.variable(
-    init_guess=0.60, lower_bound=0.45, upper_bound=0.75
+    init_guess=0.60, lower_bound=0.45, upper_bound=1
 )
-v_dihedral_deg = 35
+v_dihedral_deg = 25
 
 airfoil_tail = asb.Airfoil(name="naca0008")
 S_h_proj = 0.042
 chord_tail_root = 0.10
-span_tail_half = (
-    np.sqrt(S_h_proj / (2 * 0.6 * np.cos(np.radians(v_dihedral_deg)) ** 2)) * 2
-)
+taper_ratio_tail = 0.5  # From tip/root chord ratio
+avg_chord_tail = chord_tail_root * (1 + taper_ratio_tail) / 2
+span_tail_half = S_h_proj / (2 * avg_chord_tail * np.cos(np.radians(v_dihedral_deg)))
 
 def vrot(xyz):
     R = np.rotation_matrix_3D(angle=np.radians(v_dihedral_deg), axis="X")
@@ -90,7 +90,7 @@ v_tail = asb.Wing(
             xyz_le=vrot([tail_arm, 0, 0]), chord=chord_tail_root, airfoil=airfoil_tail
         ),
         asb.WingXSec(
-            xyz_le=vrot([tail_arm, span_tail_half / 2, 0]),
+            xyz_le=vrot([tail_arm, span_tail_half, 0]),
             chord=chord_tail_root * 0.5,
             airfoil=airfoil_tail,
         ),
@@ -170,7 +170,7 @@ opti.subject_to(
 )
 
 static_margin = (aero["x_np"] - mass_tot.x_cg) / wing.mean_aerodynamic_chord()
-opti.subject_to(static_margin >= 0.05)
+opti.subject_to(static_margin >= 0.10)
 
 opti.subject_to(
     [
@@ -301,4 +301,37 @@ plt.ylabel("Sink Rate [m/s]")
 plt.title("Sink Rate vs. Airspeed")
 plt.grid(True)
 plt.show()
+```
+
+### Trim Curve
+
+```{python}
+alphas = np.linspace(-2, 10, 15)
+cms = []
+
+for alpha in alphas:
+    op = asb.OperatingPoint(
+        velocity=s(op_point.velocity),
+        alpha=alpha
+    )
+
+    aero = asb.AeroBuildup(
+        airplane=airplane_sol,
+        op_point=op,
+        xyz_ref=s(mass_tot.xyz_cg)
+    ).run_with_stability_derivatives(alpha=True)
+    cms.append(aero["Cm"])
+
+plt.figure()
+plt.plot(alphas, cms)
+plt.axhline(0, color="black", linestyle="--")
+plt.xlabel("Angle of Attack [deg]")
+plt.ylabel("Pitching Moment Coefficient (Cm)")
+plt.title("Trim Curve: Cm vs Alpha")
+plt.grid(True)
+plt.show()
+
+print(f"α {" " * 5} Cm")
+for a, c in zip(alphas, cms):
+    print(f"{a:0.2f} {" " * 5} {c[0]:0.5f}")
 ```

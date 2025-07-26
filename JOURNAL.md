@@ -7,9 +7,7 @@ created_at: "2025-07-24"
 
 # UAV Project
 
-Total time spent as of July 25: 6 hours and 30 minutes
-
-
+Total time spent as of July 26: 7 hours and 15 minutes
 
 ## July 24 &mdash; Project Start
 (I am using this to store my research, so it's a little chaotic)
@@ -38,3 +36,9 @@ I found a cool python tool called AeroSandbox that enables users to design and o
 Link to [the current design document](https://github.com/gideongrinberg/plane-project/blob/main/design/design.md).
 
 Time spent: 4hr (roughly 1 hour on researching and 3 hours tweaking the ASB design)
+
+## July 26 &mdash; Continued Design Work
+
+I found an issue in the design of the tail that would have introduced instability and cause the aircraft to pitch uncontrollably up in flight. By changing the dimensions of the tail, I was able to ensure that the aircraft will be more stable in flight. In particular, it should be stable in cruise, although it is still unstable around very low angles of attack, so I will need to be careful while landing it.
+
+Time spent: 0.75hr

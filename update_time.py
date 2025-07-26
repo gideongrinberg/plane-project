@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 import re
 import pathlib
@@ -22,7 +22,7 @@ for i, line in enumerate(lines):
         total_time += float(time)
 
 now = datetime.datetime.now()
-lines[total_line] = f"Total time spent as of {now.strftime("%B %d")}: {int(total_time)} hours and {int(round((total_time - int(total_time)) * 60))} minutes\n\n"
+lines[total_line] = f"Total time spent as of {now.strftime("%B %d")}: {int(total_time)} hours and {int(round((total_time - int(total_time)) * 60))} minutes\n"
 with open(journal, "w") as f:
     f.write("".join(lines))
 
