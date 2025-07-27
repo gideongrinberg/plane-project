@@ -29,7 +29,7 @@ taper_ratio = 0.5
 tip_chord = root_chord * taper_ratio
 sweep_LE = 0  # straight wing
 
-airfoil_wing = asb.Airfoil(name="sd7037")
+airfoil_wing = asb.Airfoil(name="sd7037").repanel(200).set_TE_thickness(0.001) # this is necessary to prevent it from breaking in CAD
 half_span = span / 2
 
 x_wing = opti.variable(init_guess=0.02, lower_bound=-0.05, upper_bound=0.10)
@@ -62,7 +62,7 @@ tail_arm = opti.variable(
 )
 v_dihedral_deg = 25
 
-airfoil_tail = asb.Airfoil(name="naca0008")
+airfoil_tail = asb.Airfoil(name="naca0008").repanel(200).set_TE_thickness(0.001)
 S_h_proj = 0.042
 chord_tail_root = 0.10
 taper_ratio_tail = 0.5  # From tip/root chord ratio
@@ -286,9 +286,10 @@ def save_wing(path, coords, chord):
 
     msp.doc.saveas(path)
     
-    # %%
+# %%
 if __name__ == "__main__":
-
+    cg = sol(mass_tot).xyz_cg
+    print(f"Center of Gravity (CG): x = {cg[0]:.3f} m, y = {cg[1]:.3f} m, z = {cg[2]:.3f} m")
 
 # %% Export wings
     print("Exporting wing templates")
@@ -303,6 +304,3 @@ if __name__ == "__main__":
     save_wing(subdir("tail") / "root_template.dxf", tail_sol.xsecs[0].airfoil.coordinates, chord_tail_root)
     save_wing(subdir("tail") / "tip_template.dxf", tail_sol.xsecs[1].airfoil.coordinates, chord_tail_root * 0.5)
     print("Exported wing templates")
-
-    
-# %%

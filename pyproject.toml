@@ -9,3 +9,12 @@ dependencies = [
     "numpy~=2.0.1",
     "shapely>=2.1.1",
 ]
+
+[tool.pyright]
+typeCheckingMode = "off"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.0",
+    "jupyter>=1.1.1",
+]

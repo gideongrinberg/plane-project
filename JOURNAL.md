@@ -7,7 +7,7 @@ created_at: "2025-07-24"
 
 # UAV Project
 
-Total time spent as of July 26: 11 hours and 0 minutes
+Total time spent as of July 26: 12 hours and 0 minutes
 
 ## July 24 &mdash; Project Start
 (I am using this to store my research, so it's a little chaotic)
@@ -53,3 +53,10 @@ Using my python script (and after a lot more effort than expected), I was able t
 (Edit: I forgot to add this, but you can view the resulting DXF templates in schematics/. The code is still in design/.)
 
 Time spent: 3.5hr (a mix of researching and working on the templates. i know it doesn't seem like i accomplished a lot, but the templates were very difficult to debug. maybe cad is a better approach in the future.)
+
+
+### Evening – Further Design Work
+
+I exported the design from AeroSandbox into OnShape and made a schematic of the whole UAV. This helped me finalized and get a better understanding of the dimensions. The schematic is uploaded as schematics/blueprint.png. I spent some time prototyping, researching, and designing the front nose cone. I need to be careful to ensure the center of gravity remains balanced. I think some of that will need to be done once I have the parts. It should be relatively trivial to slide the wings back or forward to balance the design.
+
+Time spent: 1hr

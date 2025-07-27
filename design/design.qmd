@@ -24,7 +24,7 @@ import aerosandbox.tools.pretty_plots as p
 %matplotlib inline
 
 sys.path.append(pathlib.Path(__file__).parent.as_posix())
-import main
+from main import *
 ```
 
 ## Three-View Plan
