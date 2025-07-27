@@ -50,4 +50,6 @@ I decided to start my design with the wings. The wings will be made of foam and 
 
 Using my python script (and after a lot more effort than expected), I was able to export DXF templates for the wings and tail airfoils. I added slots for the wing spars and marked the control surfaces. I will need to make some kind of jig for the V-tail. I will also need to add the wing incidence angle to the templates to ensure proper AoA.
 
+(Edit: I forgot to add this, but you can view the resulting DXF templates in schematics/. The code is still in design/.)
+
 Time spent: 3.5hr (a mix of researching and working on the templates. i know it doesn't seem like i accomplished a lot, but the templates were very difficult to debug. maybe cad is a better approach in the future.)
